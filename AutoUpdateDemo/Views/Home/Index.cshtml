@@ -1,0 +1,62 @@
+﻿@model InstallerViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>System Name</label>
+            <input class="form-control form-control-lg" placeholder="System Name"
+                   asp-for="System" required />
+        </div>
+        <div class="form-group col-md-3">
+            <label>Current Version</label>
+            <input class="form-control form-control-lg" placeholder="Current Version"
+                   asp-for="cur_version" required />
+        </div>
+        <div class="form-group col-md-3">
+            <label>Attachment</label>
+            <input class="form-control form-control-lg" placeholder="Middle Name"
+                   asp-for="attachment" type="file" required />
+        </div>
+        <div class="form-group">
+            <label>``</label>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>System FileName</th>
+                <th>Version</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+
+                @foreach (var row in Model.installers)
+                {
+                    <tr>
+                        <td> @row.ID</td>
+                        <td> @row.System</td>
+                        <td> @row.cur_version</td>
+                        <td><a class="btn btn-primary" asp-action="Updates" asp-controller="Home" asp-route-systemID="@row.ID">View Updates</a></td>
+                        <td><a class="btn btn-primary" asp-action="GetFileStreamResultDemo" asp-controller="Home" asp-route-filename="@row.System">Download</a></td>
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>

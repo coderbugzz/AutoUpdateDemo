@@ -1,0 +1,55 @@
+﻿@model UpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-row">
+        <input type="hidden" asp-for="installer_ID" />
+        <div class="form-group col-md-3">
+            <label>Update Version</label>
+            <input class="form-control form-control-lg" placeholder="System Name"
+                   asp-for="version" required />
+        </div>
+
+        <div class="form-group col-md-3">
+            <label>Attachment</label>
+            <input class="form-control form-control-lg" placeholder="Middle Name"
+                   asp-for="attachment" type="file" required />
+        </div>
+        <div class="form-group">
+            <label>``</label>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Installer ID</th>
+                <th>Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.updates != null)
+            {
+
+                @foreach (var row in Model.updates)
+                {
+                    <tr>
+                        <td> @row.ID</td>
+                        <td> @row.installer_ID</td>
+                        <td> @row.version</td>
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>
